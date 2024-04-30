@@ -1,0 +1,7 @@
+# Main Hydra configuration file.
+defaults:
+# Pretty logging with hydra_colorlog
+  - override hydra/job_logging: colorlog
+  - override hydra/hydra_logging: colorlog
+
+input_val: 1

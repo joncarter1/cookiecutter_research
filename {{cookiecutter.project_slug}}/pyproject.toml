@@ -1,0 +1,60 @@
+# pyproject.toml files are configuration files used by Python packaging and development tools.
+[build-system]
+requires = [
+    "setuptools >= 58.0.4",
+    "wheel >= 0.37.1",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = {{cookiecutter.line_length}}
+fix = true
+exclude = ["tests"]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+docstring-code-format = true
+
+[tool.ruff.lint]
+# Run security (S), isort (I) and flake8-style (F) checks.
+select = ["S", "I", "F"]
+# S101: Allow bare asserts, we're researchers...
+# Skip unused variable rules: https://www.flake8rules.com/rules/F841.html
+# Ignore loose imports: https://www.flake8rules.com/rules/F403.html
+ignore = ["S101", "F841", "S311", "S108", "F403"]
+
+[tool.mypy]
+python_version = "3.11"
+files = "{{cookiecutter.project_slug}}"
+follow_imports = "silent"
+warn_redundant_casts = true
+warn_unused_ignores = true
+disallow_any_generics = true
+check_untyped_defs = true
+no_implicit_reexport = true
+disallow_untyped_defs = false
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+warn_untyped_fields = true
+
+# Arguments passed to `pytest`
+[tool.pytest.ini_options]
+minversion = "7.2.0"
+addopts = [
+    "--strict-config",
+    "--strict-markers",
+    "--cov={{cookiecutter.project_slug}}",
+    "--cov-branch",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-report=html:coverage.html",
+    "--cov-report=xml:coverage.xml",
+    "--junitxml=junit.xml",
+    "--doctest-modules"
+]
+testpaths = [
+    "tests"
+]
