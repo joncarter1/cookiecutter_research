@@ -20,9 +20,8 @@ docstring-code-format = true
 # Run security (S), isort (I) and flake8-style (F) checks.
 select = ["S", "I", "F"]
 # S101: Allow bare asserts, we're researchers...
-# Skip unused variable rules: https://www.flake8rules.com/rules/F841.html
 # Ignore loose imports: https://www.flake8rules.com/rules/F403.html
-ignore = ["S101", "F841", "S311", "S108", "F403"]
+ignore = ["S101", "S311", "S108", "F403"]
 
 [tool.mypy]
 python_version = "3.11"
