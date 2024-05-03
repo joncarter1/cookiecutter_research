@@ -6,7 +6,7 @@ PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 
 dotenv_example_contents = """\
 # Values in this file can be loaded into the environment with ```from dotenv import load_dotenv(); load_dotenv()```
-MY_API_KEY=xxx
+API_KEY=xxx
 """
 
 
