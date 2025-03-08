@@ -7,6 +7,7 @@ PROJECT_DIRECTORY = os.path.realpath(os.path.curdir)
 dotenv_example_contents = """\
 # Values in this file can be loaded into the environment with ```from dotenv import load_dotenv(); load_dotenv()```
 API_KEY=xxx
+TEST_VAR=3
 """
 
 
@@ -22,12 +23,23 @@ def git_init():
     subprocess.call(["git", "init"])
 
 
-def remove_file(filepath):
-    os.remove(os.path.join(PROJECT_DIRECTORY, filepath))
+def _remove(path):
+    full_path = os.path.join(PROJECT_DIRECTORY, path)
+    if os.path.isdir(full_path):
+        os.rmdir(full_path)
+    else:
+        os.remove(os.path.join(PROJECT_DIRECTORY, path))
+
+
+def remove_notebooks():
+    _remove("notebooks/Demo.ipynb")
+    _remove("notebooks")
 
 
 if __name__ == "__main__":
     create_dotenv()
     if "Not open source" == "{{ cookiecutter.open_source_license }}":
-        remove_file("LICENSE")
+        _remove("LICENSE")
+    if "{{cookiecutter.full_name}}" == "Vitaly Kurin":
+        remove_notebooks()
     git_init()

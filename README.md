@@ -1,51 +1,96 @@
-# cookiecutter_research
+# cookiecutter research
 
-A cookiecutter template for ML research in Python.
+A configurable template for ML research in Python.
 
-This template aims to combine Python software development best practices with useful research extensions.
+The aim of this template is to gently introduce Python software development best practices and useful extensions to ML researchers. This includes tools such as:
+- `uv` for Python dependency management.
+- `ruff` for automatic code linting and formatting.
+- `beartype` for runtime type-checking.
+- `hydra` for experiment configuration.
+
+Plus Python development best practices like:
+- An editable `src` package for your code.
+- A `pyproject.toml` configuration file.
+- Automatic `pre-commit` checks.
+- Testing using `pytest`.
+
+## Getting started
+
+### Prerequisites
+If you haven't already, install **uv** on your machine by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/). You should then install [**cookiecutter**](https://github.com/cookiecutter/cookiecutter) and [**pre-commit**](https://pre-commit.com) by running:
+```bash
+uv tool install cookiecutter
+uv tool install pre-commit
+```
+
+### Project generation
+To generate a new project, run:
+```bash
+cookiecutter https://github.com/joncarter1/cookiecutter_research.git
+```
+This will initiate a dialog, enabling you to configure a number of options for the new repository, such as your name, the name of the new project, and the version of Python to use. After entering these options, a new Git repository will be generated within your current directory.
+
+For example:
+
+![image](figs/dialogue.png)
+
+Most individual files contain in-line annotations which detail their responsibility and the meaning of various configuration options.
+
+### Running scripts
+The generated project contains a simple script that uses [Hydra](https://hydra.cc/) for configuration:
+
+![image](figs/script.png)
+
+Scripts are able to import code developed within your Python package in the `src` folder. There is no need to mess with `sys.path` !
+
+## Development
+
+### Automatic code checks
+
+Within the newly created repo, you should run:
+```bash
+pre-commit install
+```
+this will configure a range of checks (configured in `.pre-commit-config.yaml`) that will run automatically whenever you run `git commit`.
+
+The generated repository deliberately contains a small number of bugs, which have been introduced to highlight features of this repository including type-checking, code linting, formatting and testing.
+
+For example, `ruff` will automatically flag code quality issues:
+
+![image](figs/linting.png)
+
+Once you've fixed all the issues, re-run `git add` and `git commit` and all pre-commit checks should pass as below:
+
+![image](figs/commit.png)
+
+You can then `git push` your (hopefully) higher quality code changes.
+
+If you find the default linting and formatting rules of `ruff` too strict, it is simple to disable specific rules. See the `[tool.ruff.lint]` section of the generated `pyproject.toml` configuration file for an example of how to do this.
+
+### Testing
+Tests for generated projects should be stored under the `tests` folder and can be run with `uv run pytest`.
 
 ## Template structure
-This template generates a project with the following structure.
+
 ```bash
-envs/ # Environment files e.g. pip, Conda and Docker.
-notebooks/ # Sensible place for Jupyter notebooks.
 scripts/ 
-    example.py # An example script
+    example.py # An example script.
     config/ # Folder to store Hydra configuration files.
 src/ # Python package location for your project.
 tests/ # Contains example tests using the Pytest framework.
 .env # Used for storing env vars. Kept out of version control.
 .editorconfig # Used to define code formatting conventions.
-.pre-commit-config.yaml # Configures automatic checks that run before git commits
-.gitignore # Identifies file patterns to exclude from git
-pyproject.toml # Python configuration file
-setup.cfg # Package installation configuration file.
+.pre-commit-config.yaml # Configures automatic checks that run before git commits.
+.gitignore # Identifies file patterns to exclude from git.
+pyproject.toml # Python project configuration file.
+Dockerfile # Recipe for creating a Docker image for your project.
+.dockerignore # Files to ignore when creating the Docker image.
 ```
-
-## Usage
-From inside the directory you wish to generate a repository (e.g. `cd $HOME/code`), run:
-```bash
-cookiecutter https://github.com/joncarter1/cookiecutter_research.git
-```
-This will generate a project folder, whose name will be set by the `{{ project_slug }}` variable set during generation.
-
-You can then install a dedicated Conda environment, and the project package in editable mode, by running
-```bash
-conda env create --file envs/environment.yaml
-conda activate {{ project_slug }} # Replace with name of generated environment
-pip install -e .
-pre-commit install
-```
-Installing your research code as a Python package means that you can import the code from anywhere, e.g. within the notebooks or scripts folder, without having to worry about relative import locations, or modifying the Python path.
-
-The `-e` flag means that the imported package stays up-to-date with the local code within the `src` folder. See e.g. [here](https://stackoverflow.com/questions/35064426/when-would-the-e-editable-option-be-useful-with-pip-install) for more information about editable installs and [here](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/) for why a `src` layout is useful.
-
-`pre-commit install` sets up a tool called `pre-commit`, which automatically runs a number of checks on code staged for commit whenever you run `git commit`. If these checks fail, the `git commit` is aborted.
-
-Tests for the project can be run with `pytest`.
-
-By default, the generated Python package contains a `utils.py` module. This contains a function that will fail the tests, and code issues that will be flagged by `ruff` e.g. hard-coded credentials. These are designed to provide simple, instructive examples of the utility of the tools included in the project such as `ruff` and `pytest`.
 
 ## Credits
 This cookiecutter draws heavily on Audrey Feldroy's Python software package template:
 https://github.com/audreyfeldroy/cookiecutter-pypackage
+
+It is powered by excellent tools like `uv` and `ruff` developed by [Astral](https://astral.sh/).
+
+I'm grateful to Fran Boon (@flavour) for introducing me to the magic of cookiecutter and many other packages used in this repository.

@@ -44,9 +44,6 @@ junit.xml
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# dotenv
-.env
-
 # virtualenv
 .venv
 venv/
