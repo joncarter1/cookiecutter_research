@@ -12,13 +12,6 @@ uv run scripts/example.py
 ```
 This will dynamically install necessary dependencies into a local virtual environment (`.venv`) for the project and run the provided script using that environment. More information on **uv** can be found [here](https://docs.astral.sh/uv/).
 
-Commands can also be run using Docker:
-```bash
-docker build . -t image
-docker run image pytest
-docker run scripts/example.py
-```
-
 ## Development
 
 ### Automatic code checks
@@ -33,3 +26,11 @@ Linting and formatting in this repository are handled by **ruff**. If you find t
 
 ### Testing
 Tests for this project should be stored under the `tests` folder and can be run with `uv run pytest`.
+
+### Docker
+Commands can also be run using **Docker**, e.g.:
+```bash
+docker build . -t {{ cookiecutter.project_slug }}:latest
+docker run {{ cookiecutter.project_slug }}:latest pytest
+docker run {{ cookiecutter.project_slug }}:latest scripts/example.py
+```
