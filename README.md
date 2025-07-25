@@ -16,19 +16,7 @@ Plus, Python development best practices like:
 
 ### 🔄 Migration to Copier (07-2025)
 
-This template has been **migrated from Cookiecutter to Copier**! 
-
-**What changed:**
-- **Template engine**: Now uses [Copier](https://copier.readthedocs.io/) instead of Cookiecutter
-- **Better templating**: More flexible Jinja2 templating with modern features
-- **Task system**: Post-generation tasks for automatic setup (git init, .env creation, etc.)
-
-**For new users**: Simply use the Copier command shown below - everything works the same!
-
-**For existing projects**: Your generated projects are unaffected. Future template updates can be applied using Copier's update feature:
-```bash
-copier update
-```
+This template has been **migrated from Cookiecutter to Copier**! See below for more details.
 
 ## Getting started
 
@@ -44,13 +32,7 @@ To generate a new project with name `your_new_project`, run:
 ```bash
 uvx copier copy https://github.com/joncarter1/cookiecutter_research.git your_new_project --trust
 ```
-This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, a description of your project, and the version of Python to use. After entering these options, a new Git repository will be generated.
-
-For example:
-
-![image](figs/dialogue.png)
-
-Most individual files in the generated project contain in-line annotations detailing their responsibility and the meaning of various configuration options.
+This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, a description of your project, and the version of Python to use. After entering these options, a new Git repository will be generated. Most individual files in the generated project contain in-line annotations detailing their responsibility and the meaning of various configuration options.
 
 ### Running scripts
 The generated project contains a simple script that uses [Hydra](https://hydra.cc/) for configuration:
@@ -65,7 +47,7 @@ Scripts can import code developed within your Python package in the `src` folder
 
 Within the newly created repo, you should run:
 ```bash
-pre-commit install
+uv run pre-commit install
 ```
 This will configure a range of checks (configured in `.pre-commit-config.yaml`) that will run automatically whenever you run `git commit`.
 
@@ -106,4 +88,4 @@ Dockerfile # Recipe for creating a Docker image for your project.
 ## Credits
 This template is powered by excellent tools like `uv` and `ruff` developed by [Astral](https://astral.sh/).
 
-I'm grateful to Fran Boon (@flavour) for introducing me to the magic of project templating and many other packages used in this repository.
+I'm grateful to Fran Boon (@flavour) for introducing me to the magic of project templating and many of the packages used in this repository.
