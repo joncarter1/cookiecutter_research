@@ -1,12 +1,12 @@
 # pyproject.toml files are configuration files used by Python packaging and development tools.
 [project]
-name = "{{cookiecutter.project_slug}}"
+name = "{{project_slug}}"
 version = "0.0.1"
-description = "{{cookiecutter.project_short_description}}"
+description = "{{project_short_description}}"
 readme = "README.md"
-requires-python = ">={{cookiecutter.python_version}}"
+requires-python = ">={{python_version}}"
 authors = [
-    {name = "{{cookiecutter.full_name}}"}
+    {name = "{{full_name}}"}
 ]
 # Dependencies needed within the package.
 dependencies = [
@@ -25,7 +25,7 @@ dev = [
     "pre-commit>=4.1.0",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-{% if cookiecutter.mypy -%}
+{% if mypy -%}
     "mypy>=1.15.0",
 {% endif %}
     "ruff>=0.9.5",
@@ -39,7 +39,7 @@ build-backend = "hatchling.build"
 default-groups = ["dev", "scripts"]
 
 [tool.ruff]
-line-length = {{cookiecutter.line_length}}
+line-length = {{line_length}}
 fix = true
 exclude = ["tests"]
 force-exclude = true
@@ -63,7 +63,7 @@ minversion = "7.2.0"
 addopts = [
     "--strict-config",
     "--strict-markers",
-    "--cov={{cookiecutter.project_slug}}",
+    "--cov={{project_slug}}",
     "--cov-branch",
     "--cov-report=term-missing:skip-covered",
     "--cov-report=html:coverage.html",
@@ -75,11 +75,11 @@ testpaths = [
     "tests"
 ]
 
-{% if cookiecutter.mypy -%}
+{% if mypy -%}
 # Configuration for mypy (if using)
 [tool.mypy]
-python_version = "{{cookiecutter.python_version}}"
-files = "{{cookiecutter.project_slug}}"
+python_version = "{{python_version}}"
+files = "{{project_slug}}"
 follow_imports = "silent"
 warn_redundant_casts = true
 warn_unused_ignores = true

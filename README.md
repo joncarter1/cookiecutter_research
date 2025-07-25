@@ -1,4 +1,4 @@
-# cookiecutter research
+# copier research
 
 This template introduces Python software development best practices and useful extensions to ML researchers:
 - **uv** for Python dependency management.
@@ -15,16 +15,16 @@ Plus, Python development best practices like:
 ## Getting started
 
 ### Prerequisites
-If you haven't already, install **uv** on your machine by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/). You should then install [**cookiecutter**](https://github.com/cookiecutter/cookiecutter) and [**pre-commit**](https://pre-commit.com) by running:
+If you haven't already, install **uv** on your machine by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/). You should then install [**copier**](https://github.com/copier-org/copier) and [**pre-commit**](https://pre-commit.com) by running:
 ```bash
-uv tool install cookiecutter
+uv tool install copier
 uv tool install pre-commit
 ```
 
 ### Project generation
 To generate a new project, run:
 ```bash
-cookiecutter https://github.com/joncarter1/cookiecutter_research.git
+copier copy https://github.com/joncarter1/cookiecutter_research.git . --trust
 ```
 This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, the name of the new project, and the version of Python to use. After entering these options, a new Git repository will be generated within your current directory.
 
@@ -86,4 +86,6 @@ Dockerfile # Recipe for creating a Docker image for your project.
 ```
 
 ## Credits
-This cookiecutter draws heavily on Audrey Feldroy's [Python package template](https://github.com/audreyfeldroy/cookiecutter-pypackage). It is powered by excellent tools like **uv** and **ruff** developed by [Astral](https://astral.sh/). I'm grateful to Fran Boon ([@flavour](https://github.com/flavour)) for introducing me to the magic of **cookiecutter** and many other packages used in this repository.
+This template is powered by excellent tools like `uv` and `ruff` developed by [Astral](https://astral.sh/).
+
+I'm grateful to Fran Boon (@flavour) for introducing me to the magic of project templating and many other packages used in this repository.
