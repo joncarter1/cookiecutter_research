@@ -30,7 +30,7 @@ Tests for this project should be stored under the `tests` folder and can be run 
 ### Docker
 Commands can also be run using **Docker**, e.g.:
 ```bash
-docker build . -t {{ cookiecutter.project_slug }}:latest
-docker run {{ cookiecutter.project_slug }}:latest pytest
-docker run {{ cookiecutter.project_slug }}:latest scripts/example.py
+docker build . -t {{ project_slug }}:latest
+docker run {{ project_slug }}:latest pytest
+docker run {{ project_slug }}:latest scripts/example.py
 ```

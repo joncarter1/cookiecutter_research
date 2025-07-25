@@ -4,7 +4,6 @@ import subprocess
 import sys
 import re
 import shutil
-from pathlib import Path
 
 # Get the destination directory - this is where the generated project will be
 PROJECT_DIRECTORY = os.getcwd()
@@ -46,7 +45,7 @@ def git_init():
     os.chdir(PROJECT_DIRECTORY)
     subprocess.call(["git", "init"])
 
-def _remove(path):
+def remove(path):
     """Remove file or directory."""
     full_path = os.path.join(PROJECT_DIRECTORY, path)
     if os.path.isdir(full_path):
@@ -56,17 +55,9 @@ def _remove(path):
 
 def remove_notebooks():
     """Remove notebooks for specific user."""
-    _remove("notebooks/Demo.ipynb")
-    _remove("notebooks")
+    remove("notebooks/Demo.ipynb")
+    remove("notebooks")
 
-def handle_license(license_choice, full_name):
-    """Remove LICENSE file if not open source."""
-    if license_choice == "Not open source":
-        _remove("LICENSE")
-    
-    # Special handling for specific user
-    if full_name == "Vitaly Kurin":
-        remove_notebooks()
 
 if __name__ == "__main__":
     # Run pre-generation checks
@@ -79,7 +70,11 @@ if __name__ == "__main__":
     
     validate_project_slug(project_slug)
     
-    # Run post-generation tasks
     create_dotenv()
-    handle_license(license_choice, full_name)
+    if license_choice == "Not open source":
+        remove("LICENSE")
+    
+    if full_name == "Vitaly Kurin":
+        remove_notebooks()
+    
     git_init() 

@@ -2,6 +2,17 @@ _templates_suffix: .jinja
 _envops:
   keep_trailing_newline: true
 
+# Files to skip copying (template metadata and docs)
+_skip_if_exists:
+  - .git/
+  
+_exclude:
+  - "copier.yaml"
+  - ".copier-answers.yml"  
+  - "figs"  # Template documentation images
+  - ".git/**"  # Never copy the template's git repository
+  - "_copier_tasks.py"  # Task script shouldn't be in generated project
+
 # Inject current year for license templates
 _jinja_extensions:
   - jinja2.ext.do
@@ -24,8 +35,8 @@ project_name:
 
 project_slug:
   type: str
-  help: "Choose a name for your installable Python package:"
   default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
+  when: false  # Don't prompt - automatically derive from project_name
 
 project_short_description:
   type: str
@@ -60,5 +71,5 @@ open_source_license:
   default: "MIT license"
 
 _tasks:
-  - command: "cd {{ project_slug }} && uv run python ../_copier_tasks.py '{{ project_slug }}' '{{ open_source_license }}' '{{ full_name }}'"
+  - command: "uv run python {{ _copier_conf.src_path }}/_copier_tasks.py '{{ project_slug }}' '{{ open_source_license }}' '{{ full_name }}'"
     when: "{{ _copier_conf.answers_file is defined }}" 

@@ -12,6 +12,24 @@ Plus, Python development best practices like:
 - Automatic **pre-commit** checks.
 - Testing using the **pytest** framework.
 
+## Updates
+
+### 🔄 Migration to Copier (07-2025)
+
+This template has been **migrated from Cookiecutter to Copier**! 
+
+**What changed:**
+- **Template engine**: Now uses [Copier](https://copier.readthedocs.io/) instead of Cookiecutter
+- **Better templating**: More flexible Jinja2 templating with modern features
+- **Task system**: Post-generation tasks for automatic setup (git init, .env creation, etc.)
+
+**For new users**: Simply use the Copier command shown below - everything works the same!
+
+**For existing projects**: Your generated projects are unaffected. Future template updates can be applied using Copier's update feature:
+```bash
+copier update
+```
+
 ## Getting started
 
 ### Prerequisites
@@ -22,11 +40,11 @@ uv tool install pre-commit
 ```
 
 ### Project generation
-To generate a new project, run:
+To generate a new project with name `your_new_project`, run:
 ```bash
-copier copy https://github.com/joncarter1/cookiecutter_research.git . --trust
+uvx copier copy https://github.com/joncarter1/cookiecutter_research.git your_new_project --trust
 ```
-This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, the name of the new project, and the version of Python to use. After entering these options, a new Git repository will be generated within your current directory.
+This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, a description of your project, and the version of Python to use. After entering these options, a new Git repository will be generated.
 
 For example:
 

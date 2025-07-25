@@ -1,4 +1,0 @@
-# Exclude template which isn't parseable.
-exclude = [
-  '*cookiecutter.project_slug*'
-]
