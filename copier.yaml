@@ -1,0 +1,75 @@
+_templates_suffix: .jinja
+_envops:
+  keep_trailing_newline: true
+
+# Files to skip copying (template metadata and docs)
+_skip_if_exists:
+  - .git/
+  
+_exclude:
+  - "copier.yaml"
+  - ".copier-answers.yml"  
+  - "figs"  # Template documentation images
+  - ".git/**"  # Never copy the template's git repository
+  - "_copier_tasks.py"  # Task script shouldn't be in generated project
+
+# Inject current year for license templates
+_jinja_extensions:
+  - jinja2.ext.do
+
+# Make current year available in templates  
+current_year:
+  type: int
+  default: "{{ '%Y' | strftime }}"
+  when: false  # Don't prompt user for this
+
+full_name:
+  type: str
+  help: "Type your name:"
+  default: "John Smith"
+
+project_name:
+  type: str
+  help: "Give your project a name:"
+  default: "My Research Project"
+
+project_slug:
+  type: str
+  default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
+  when: false  # Don't prompt - automatically derive from project_name
+
+project_short_description:
+  type: str
+  help: "Provide a short description of your project:"
+  default: "Research repository with an installable package."
+
+line_length:
+  type: int
+  help: "Choose a maximum line length for code formatting:"
+  default: 120
+
+python_version:
+  type: float
+  help: "Choose a version of Python:"
+  default: 3.11
+
+mypy:
+  type: bool
+  help: "Would you like to use mypy for static type checking?"
+  default: false
+
+open_source_license:
+  type: str
+  help: "Choose a license:"
+  choices:
+    - "MIT license"
+    - "BSD license"
+    - "ISC license"
+    - "Apache Software License 2.0"
+    - "GNU General Public License v3"
+    - "Not open source"
+  default: "MIT license"
+
+_tasks:
+  - command: "uv run python {{ _copier_conf.src_path }}/_copier_tasks.py '{{ project_slug }}' '{{ open_source_license }}' '{{ full_name }}'"
+    when: "{{ _copier_conf.answers_file is defined }}" 

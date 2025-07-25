@@ -1,4 +1,4 @@
-# cookiecutter research
+# copier research
 
 This template introduces Python software development best practices and useful extensions to ML researchers:
 - **uv** for Python dependency management.
@@ -12,27 +12,27 @@ Plus, Python development best practices like:
 - Automatic **pre-commit** checks.
 - Testing using the **pytest** framework.
 
+## Updates
+
+### 🔄 Migration to Copier (07-2025)
+
+This template has been **migrated from Cookiecutter to Copier**! See below for more details.
+
 ## Getting started
 
 ### Prerequisites
-If you haven't already, install **uv** on your machine by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/). You should then install [**cookiecutter**](https://github.com/cookiecutter/cookiecutter) and [**pre-commit**](https://pre-commit.com) by running:
+If you haven't already, install **uv** on your machine by following the instructions [here](https://docs.astral.sh/uv/getting-started/installation/). You should then install [**copier**](https://github.com/copier-org/copier) and [**pre-commit**](https://pre-commit.com) by running:
 ```bash
-uv tool install cookiecutter
+uv tool install copier
 uv tool install pre-commit
 ```
 
 ### Project generation
-To generate a new project, run:
+To generate a new project with name `your_new_project`, run:
 ```bash
-cookiecutter https://github.com/joncarter1/cookiecutter_research.git
+uvx copier copy https://github.com/joncarter1/cookiecutter_research.git your_new_project --trust
 ```
-This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, the name of the new project, and the version of Python to use. After entering these options, a new Git repository will be generated within your current directory.
-
-For example:
-
-![image](figs/dialogue.png)
-
-Most individual files in the generated project contain in-line annotations detailing their responsibility and the meaning of various configuration options.
+This will initiate a dialog, enabling you to configure many options for the new repository, such as your name, a description of your project, and the version of Python to use. After entering these options, a new Git repository will be generated. Most individual files in the generated project contain in-line annotations detailing their responsibility and the meaning of various configuration options.
 
 ### Running scripts
 The generated project contains a simple script that uses [Hydra](https://hydra.cc/) for configuration:
@@ -47,7 +47,7 @@ Scripts can import code developed within your Python package in the `src` folder
 
 Within the newly created repo, you should run:
 ```bash
-pre-commit install
+uv run pre-commit install
 ```
 This will configure a range of checks (configured in `.pre-commit-config.yaml`) that will run automatically whenever you run `git commit`.
 
@@ -86,4 +86,6 @@ Dockerfile # Recipe for creating a Docker image for your project.
 ```
 
 ## Credits
-This cookiecutter draws heavily on Audrey Feldroy's [Python package template](https://github.com/audreyfeldroy/cookiecutter-pypackage). It is powered by excellent tools like **uv** and **ruff** developed by [Astral](https://astral.sh/). I'm grateful to Fran Boon ([@flavour](https://github.com/flavour)) for introducing me to the magic of **cookiecutter** and many other packages used in this repository.
+This template is powered by excellent tools like `uv` and `ruff` developed by [Astral](https://astral.sh/).
+
+I'm grateful to Fran Boon (@flavour) for introducing me to the magic of project templating and many of the packages used in this repository.
