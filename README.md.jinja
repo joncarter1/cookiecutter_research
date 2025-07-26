@@ -28,6 +28,7 @@ Linting and formatting in this repository are handled by **ruff**. If you find t
 ### Testing
 Tests for this project should be stored under the `tests` folder and can be run with `uv run pytest`.
 
+{% if docker -%}
 ### Docker
 Commands can also be run using **Docker**, e.g.:
 ```bash
@@ -35,3 +36,4 @@ docker build . -t {{ project_slug }}:latest
 docker run {{ project_slug }}:latest pytest
 docker run {{ project_slug }}:latest scripts/example.py
 ```
+{% endif %}

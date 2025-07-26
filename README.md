@@ -81,8 +81,8 @@ tests/ # Contains example tests using the Pytest framework.
 .pre-commit-config.yaml # Configures automatic checks that run before git commits.
 .gitignore # Identifies file patterns to exclude from git.
 pyproject.toml # Python project configuration file.
-Dockerfile # Recipe for creating a Docker image for your project.
-.dockerignore # Files to ignore when creating the Docker image.
+Dockerfile # (Optional) Recipe for creating a Docker image for your project.
+.dockerignore # (Optional) Files to ignore when creating the Docker image.
 ```
 
 ## Credits
