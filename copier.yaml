@@ -25,12 +25,11 @@ current_year:
 
 full_name:
   type: str
-  help: "Type your name (for the project's README):"
+  help: "Type your name (for the README):"
 
 project_name:
   type: str
-  help: "Give your project a name:"
-  default: "My Research Project"
+  help: "Give your project a short name (for the README):"
 
 project_slug:
   type: str
