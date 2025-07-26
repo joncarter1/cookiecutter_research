@@ -25,23 +25,26 @@ current_year:
 
 full_name:
   type: str
-  help: "Type your name:"
-  default: "John Smith"
+  help: "Type your name (for the README):"
+  validator: "{% if not full_name.strip() %}Field cannot be empty{% endif %}"
+
 
 project_name:
   type: str
-  help: "Give your project a name:"
-  default: "My Research Project"
+  help: "Give your project a short name (for the README):"
+  validator: "{% if not project_name.strip() %}Field cannot be empty{% endif %}"
 
 project_slug:
   type: str
+  help: "Choose a name for your project's Python package:"
   default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
-  when: false  # Don't prompt - automatically derive from project_name
+  validator: "{% if not project_slug.strip() %}Field cannot be empty{% endif %}"
 
 project_short_description:
   type: str
-  help: "Provide a short description of your project:"
-  default: "Research repository with an installable package."
+  help: "Provide a short description of your project for the README:"
+  default: "Research repository for project X."
+  validator: "{% if not project_short_description.strip() %}Field cannot be empty{% endif %}"
 
 line_length:
   type: int
@@ -58,6 +61,11 @@ mypy:
   help: "Would you like to use mypy for static type checking?"
   default: false
 
+docker:
+  type: bool
+  help: "Would you like to use Docker for containerization?"
+  default: false
+
 open_source_license:
   type: str
   help: "Choose a license:"
@@ -71,5 +79,13 @@ open_source_license:
   default: "MIT license"
 
 _tasks:
+  - command: "git init ."
+
+  - command: "rm LICENSE"
+    when: "{{ open_source_license == 'Not open source' }}"
+
+  - command: "rm -f .dockerignore Dockerfile"
+    when: "{{ docker == false }}"
+
   - command: "uv run python {{ _copier_conf.src_path }}/_copier_tasks.py '{{ project_slug }}' '{{ open_source_license }}' '{{ full_name }}'"
     when: "{{ _copier_conf.answers_file is defined }}" 

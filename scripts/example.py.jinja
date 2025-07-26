@@ -2,11 +2,10 @@
 
 https://hydra.cc/
 """
-from dotenv import load_dotenv
 import hydra
 import os
 import logging
-from {{project_slug}}.utils import func, func2
+from {{project_slug}}.utils import add_two
 
 
 logger = logging.getLogger(__name__) # Hydra configures logging for us.
@@ -23,10 +22,8 @@ def main(cfg) -> None:
     logger.info("This is a debug statement.")
     logger.warning("This is a warning message.")
     logger.error("This is an error message")
-    func(a=cfg.input_val)
-    func2(a=cfg.input_val)
+    add_two(a=cfg.input_val)
     logger.info("Completed.")
 
 if __name__ == "__main__":
-    load_dotenv() # Load secrets from .env file.
     main()
