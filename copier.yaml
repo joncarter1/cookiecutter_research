@@ -26,20 +26,25 @@ current_year:
 full_name:
   type: str
   help: "Type your name (for the README):"
+  validator: "{% if not full_name.strip() %}Field cannot be empty{% endif %}"
+
 
 project_name:
   type: str
   help: "Give your project a short name (for the README):"
+  validator: "{% if not project_name.strip() %}Field cannot be empty{% endif %}"
 
 project_slug:
   type: str
   help: "Choose a name for your project's Python package:"
   default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
+  validator: "{% if not project_slug.strip() %}Field cannot be empty{% endif %}"
 
 project_short_description:
   type: str
   help: "Provide a short description of your project for the README:"
   default: "Research repository for project X."
+  validator: "{% if not project_short_description.strip() %}Field cannot be empty{% endif %}"
 
 line_length:
   type: int
