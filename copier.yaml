@@ -25,8 +25,7 @@ current_year:
 
 full_name:
   type: str
-  help: "Type your name:"
-  default: "John Smith"
+  help: "Type your name (for the project's README):"
 
 project_name:
   type: str
@@ -35,13 +34,13 @@ project_name:
 
 project_slug:
   type: str
+  help: "Choose a name for your project's Python package:"
   default: "{{ project_name.lower().replace(' ', '_').replace('-', '_') }}"
-  when: false  # Don't prompt - automatically derive from project_name
 
 project_short_description:
   type: str
-  help: "Provide a short description of your project:"
-  default: "Research repository with an installable package."
+  help: "Provide a short description of your project for the README:"
+  default: "Research repository for project X."
 
 line_length:
   type: int
