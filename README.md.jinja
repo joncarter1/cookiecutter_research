@@ -8,9 +8,10 @@ Environment set-up
 --------
 The Python environment for this project is managed using **uv**. Commands can be run with e.g.
 ```bash
-uv run scripts/example.py
+uv run --env-file .env scripts/example.py
 ```
-This will dynamically install necessary dependencies into a local virtual environment (`.venv`) for the project and run the provided script using that environment. More information on **uv** can be found [here](https://docs.astral.sh/uv/).
+This will dynamically install necessary dependencies into a local virtual environment (`.venv`) for the project and run the provided script using that environment.
+More information on **uv** can be found [here](https://docs.astral.sh/uv/).
 
 ## Development
 

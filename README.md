@@ -1,6 +1,6 @@
-# copier research
+# Cookiecutter Research
 
-This template introduces Python software development best practices and useful extensions to ML researchers:
+A template repository with Python software development best practices and useful extensions for ML researchers:
 - **uv** for Python dependency management.
 - **ruff** for automatic code linting and formatting.
 - **beartype** for runtime type-checking.
@@ -51,7 +51,7 @@ uv run pre-commit install
 ```
 This will configure a range of checks (configured in `.pre-commit-config.yaml`) that will run automatically whenever you run `git commit`.
 
-The generated repository deliberately contains a small number of bugs, which have been introduced to highlight features of this repository, including type-checking, code linting, formatting and testing.
+The generated repository deliberately contains a small number of bugs in `broken_utils.py`, which have been introduced to highlight features of this repository, including type-checking, code linting, formatting and testing.
 
 For example, **ruff** will automatically flag code quality issues:
 
