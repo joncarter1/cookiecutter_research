@@ -72,16 +72,11 @@ if __name__ == "__main__":
 
     # Get values from command line arguments
     project_slug = sys.argv[1] if len(sys.argv) > 1 else ""
-    license_choice = sys.argv[2] if len(sys.argv) > 2 else ""
     full_name = sys.argv[3] if len(sys.argv) > 3 else ""
 
     validate_project_slug(project_slug)
 
     create_dotenv()
-    if license_choice == "Not open source":
-        remove("LICENSE")
 
     if full_name == "Vitaly Kurin":
         remove_notebooks()
-
-    git_init()

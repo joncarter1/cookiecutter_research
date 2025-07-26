@@ -56,6 +56,11 @@ mypy:
   help: "Would you like to use mypy for static type checking?"
   default: false
 
+docker:
+  type: bool
+  help: "Would you like to use Docker for containerization?"
+  default: false
+
 open_source_license:
   type: str
   help: "Choose a license:"
@@ -69,5 +74,13 @@ open_source_license:
   default: "MIT license"
 
 _tasks:
+  - command: "git init ."
+
+  - command: "rm LICENSE"
+    when: "{{ open_source_license == 'Not open source' }}"
+
+  - command: "rm -f .dockerignore Dockerfile"
+    when: "{{ docker == false }}"
+
   - command: "uv run python {{ _copier_conf.src_path }}/_copier_tasks.py '{{ project_slug }}' '{{ open_source_license }}' '{{ full_name }}'"
     when: "{{ _copier_conf.answers_file is defined }}" 
